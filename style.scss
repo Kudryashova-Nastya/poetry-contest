@@ -1,0 +1,109 @@
+@import "null.scss";
+
+// 1. Импортируем изначальные значения
+//@import "bulma/sass/utilities/initial-variables";
+//@import "bulma/sass/utilities/functions";
+
+// 2. Устанавливаем свои значения
+// Обновляем голубой цвет
+$blue: #729ceb;
+// Добавляем свой шрифт
+$family-serif: "Montserrat Alternates", sans-serif;
+
+// Ставим розовый цвет как основной
+$primary: $blue;
+// Задаем шрифт
+$family-primary: $family-serif;
+// 4. Подключаем основной файл
+//@import "bulma/bulma";
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    overflow: hidden;
+}
+
+main {
+    padding: 2px 2%;
+}
+
+.fon__slogan {
+    background-image: url(/img/black2.jpg);
+    background-size: 350px;
+    text-align: center;
+}
+
+.fon__img {
+    margin: 22px auto;
+    margin-bottom: 10px;
+    max-height: 50px;
+}
+
+.menu__logo {
+    display: inline-block;
+}
+
+$menu-height: 45px;
+
+.menu {
+line-height: $menu-height;
+vertical-align: middle;
+}
+
+.logo__img {
+    height: 42px;
+    position: absolute;
+    top:3px;
+    left:2%
+}
+
+.menu__punkt {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
+    color: rgb(17, 17, 17);
+    margin-left: 2%;
+
+    &:nth-child(2) {
+        margin-left: 0;
+    }
+
+    &:hover {
+        color: rgb(0, 162, 255);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 675px) {
+        margin-left:4.5%;
+    }
+}
+
+.mobile-ico {
+    display: none;
+    height: 35px;
+    @media (max-width: 675px) {
+    display: inline-block;
+    vertical-align: middle;
+    }
+}
+
+.punkt-title {
+    @media (max-width: 675px) {
+    display: none;
+    }
+}
+
+.menu__container {
+    padding: 7px auto;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.column {
+    background-color: red;
+    color: blue;
+}
+
+.columns {
+    margin: 0;
+}
