@@ -1,0 +1,161 @@
+footer {
+    font-size: 12px;
+    background-color: rgb(235, 235, 235);
+    padding: 15px 10%;
+    margin-top: 40px;
+
+    @media print {
+        display: none;
+    }
+}
+
+main {
+    padding: 2px 2%;
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 65px;
+    margin-bottom: 25px;
+    font-weight: 400;
+    clear: both;
+}
+
+@media print {
+
+    .text_links,
+    .button__container {
+        display: none;
+    }
+}
+
+ul {
+    list-style-type: circle;
+    font-style: italic;
+}
+
+ul,
+ol {
+    margin-left: 20px;
+}
+
+li {
+    padding-left: 5px;
+}
+
+
+.text_container p,
+ul,
+ol {
+    padding-bottom: 10px;
+}
+
+.fon__slogan {
+    background-image: url(img/black2.jpg);
+    background-size: 350px;
+    text-align: center;
+
+    @media print {
+        display: none;
+    }
+}
+
+.fon__img {
+    margin: 22px auto;
+    margin-bottom: 10px;
+    max-height: 50px;
+    padding: 0 5px;
+}
+
+.menu__logo {
+    display: inline-block;
+}
+
+$menu-height: 45px;
+
+.menu {
+    line-height: $menu-height;
+    vertical-align: middle;
+    position: relative;
+
+    @media print {
+        display: none;
+    }
+}
+
+.logo__img {
+    height: 42px;
+    position: absolute;
+    top: 3px;
+    left: 2%
+}
+
+.menu__punkt {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
+    color: rgb(12, 11, 11);
+    margin-right: 3.5%;
+    font-weight: 500;
+
+    &:nth-child(5) {
+        padding-right: 0;
+    }
+
+    &:hover {
+        color: rgb(0, 162, 255);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 655px) {
+        margin-right: 5.5%;
+    }
+}
+
+.mobile-ico {
+    display: none;
+    height: 35px;
+
+    @media (max-width: 655px) {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.punkt-title {
+    @media (max-width: 655px) {
+        display: none;
+    }
+}
+
+.menu__container {
+    //padding: 7px;
+    //text-align: center;
+    float: right;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-right: 73px;
+}
+
+
+.text_container {
+    width: 68%;
+    margin: 0 auto;
+
+    @media (max-width: 775px) {
+        width: 85%
+    }
+}
+
+span.slogan {
+    font-weight: 600;
+    font-size: 22px;
+    font-style: italic;
+}
+
+.button__container {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 10px
+}

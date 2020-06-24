@@ -1,55 +1,3 @@
-@charset "UTF-8";
-/*Обнуление*/
-*, *:before, *:after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-nav, footer, header, aside {
-  display: block;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  font-size: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-input, button, textarea {
-  font-family: inherit;
-}
-
-input::-ms-clear {
-  display: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
-}
-
-body {
-  font-family: 'Montserrat Alternates', sans-serif;
-  color: #060511;
-  font-size: 17px;
-}
-
-@media (max-width: 455px) {
-  body {
-    font-size: 15px;
-  }
-}
-
 footer {
   font-size: 12px;
   background-color: #ebebeb;
@@ -77,8 +25,7 @@ h1 {
 }
 
 @media print {
-  .text_links,
-  .button__container {
+  .text_links, .button__container {
     display: none;
   }
 }
@@ -216,14 +163,4 @@ span.slogan {
   margin-bottom: 40px;
   margin-top: 10px;
 }
-
-.columns {
-  margin: 0;
-}
-
-.category__filter {
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  padding: 30px 5%;
-}
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=main.css.map */
