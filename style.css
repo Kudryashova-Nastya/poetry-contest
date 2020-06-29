@@ -226,4 +226,58 @@ span.slogan {
   border-radius: 20px;
   padding: 30px 5%;
 }
+
+.work__block {
+  background-color: #fafafa;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  padding: 5%;
+}
+
+h2 {
+  font-weight: 500;
+  padding-bottom: 7px;
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 17px;
+  margin-bottom: 10px;
+}
+
+.comments__button {
+  text-align: center;
+}
+
+.comments__button button {
+  padding: 6px 15px;
+}
+
+.comment__title {
+  font-weight: 500;
+}
+
+.comment__status {
+  padding-left: 5px;
+  padding-right: 10px;
+  font-style: italic;
+}
+
+.comment__body {
+  background-color: #f7f7f7;
+  border-radius: 20px;
+  padding: 13px 18px;
+  margin-bottom: 12px;
+  border: 2px solid white;
+}
+
+.comment__mark {
+  font-style: italic;
+}
+
+.comment__no {
+  text-align: center;
+}
 /*# sourceMappingURL=style.css.map */

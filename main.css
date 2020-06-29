@@ -25,7 +25,8 @@ h1 {
 }
 
 @media print {
-  .text_links, .button__container {
+  .text_links,
+  .button__container {
     display: none;
   }
 }
