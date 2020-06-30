@@ -24,6 +24,12 @@ h1 {
   clear: both;
 }
 
+@media (max-width: 500px) {
+  h1 h1 {
+    font-size: 25px;
+  }
+}
+
 @media print {
   .text_links,
   .button__container {

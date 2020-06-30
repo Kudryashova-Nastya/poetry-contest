@@ -1,10 +1,7 @@
 @import "null.scss";
 
-// 1. Импортируем изначальные значения
-//@import "bulma/sass/utilities/initial-variables";
-//@import "bulma/sass/utilities/functions";
 
-// 2. Устанавливаем свои значения
+// Устанавливаем свои значения
 // Обновляем голубой цвет
 $blue: #729ceb;
 // Добавляем свой шрифт
@@ -22,155 +19,36 @@ body {
     font-size: 17px;
 
     @media (max-width: 455px) {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
 @import "main.scss";
 @import "works.scss";
 
-.category__filter {
-    background-color: rgb(240, 240, 240);
-    border-radius: 20px;
-    padding: 30px 5%;
-}
+.members__container {
+    padding: 0 10%;
 
-.work__block {
-    background-color: rgb(250, 250, 250);
-    border-radius: 20px;
-    margin-bottom: 40px;
-    padding: 5%;
-}
+    @media (max-width: 570px) {
+        padding: 0 4%;
 
-h2 {
-    font-weight: 500;
-    padding-bottom: 7px;
-    font-size: 20px;
-}
-
-h3 {
-    font-size: 18px;
-    font-weight: 500;
-    padding-left: 17px;
-    margin-bottom: 10px;
-    margin-top: 30px
-}
-
-.comments__button {
-    text-align: center;
-}
-
-
-
-.comment__title {
-    font-weight: 500;
-}
-
-.comment__status {
-    padding-left: 5px;
-    padding-right: 10px;
-    font-style: italic;
-}
-
-.comment__body {
-    background-color: rgb(240, 240, 240);
-    border-radius: 20px;
-    padding: 13px 18px;
-    margin-bottom: 12px;
-    border: 2px solid white;
-}
-
-.comment__mark {
-    font-style: italic;
-}
-
-.comment__no {
-    text-align: center;
-}
-
-.error {
-    color: red;
-    text-align: center;
-}
-
-.myComment__body {
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
-    padding: 13px 18px;
-    margin-bottom: 12px;
-    border: 2px solid rgb(240, 240, 240);
-}
-
-label {
-    padding-right: 15px;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background: rgb(141, 141, 141);
-    margin: 20px 0;
-    margin-bottom: 35px;
-}
-
-.comments__button button,
-.submit {
-    padding: 8px 25px;
-    background-color: transparent;
-    border-color: #3298dc;
-    color: #3298dc;
-    border-radius: 20px;
-
-    &:hover {
-        background-color: #3298dc;
-        color: #fff;
+        h1 {
+            font-size: 25px;
+        }
     }
 }
 
-.comment__textarea {
-    resize: none;
-    width: 50%;
-    margin: 10px 0;
-
-    @media (max-width: 775px) {
-        width: 100%;
-    }
+.members__links {
+    line-height: 160%;
 }
 
-.submit {
-    padding: 6px 20px;
-    border-color: #3daffc;
-    color: #3daffc;
+.members__arrow {
+    height: 40px;
+    vertical-align: middle;
 }
 
-#pages {
-    font-weight: bold;
-    font-size: 22px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-#pages a {
-    margin: 0 4px;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    text-decoration: none;
-    border-radius: 12px;
-    display: inline-block;
-    width: 45px;
-}
-
-#pages a:hover {
-    text-decoration: underline;;
-}
-
-
-#pages span {
-    margin: 0 4px;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 12px;
-    display: inline-block;
-    width: 45px;
+.members__back {
+    line-height: 40px;
+    vertical-align: middle;
+    margin-bottom: 15px;
 }

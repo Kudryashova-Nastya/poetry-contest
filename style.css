@@ -46,7 +46,7 @@ body {
 
 @media (max-width: 455px) {
   body {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -74,6 +74,12 @@ h1 {
   margin-bottom: 25px;
   font-weight: 400;
   clear: both;
+}
+
+@media (max-width: 500px) {
+  h1 h1 {
+    font-size: 25px;
+  }
 }
 
 @media print {
@@ -276,6 +282,7 @@ h3 {
 
 .comment__no {
   text-align: center;
+  margin-top: 10px;
 }
 
 .error {
@@ -365,5 +372,33 @@ hr {
   border-radius: 12px;
   display: inline-block;
   width: 45px;
+}
+
+.members__container {
+  padding: 0 10%;
+}
+
+@media (max-width: 570px) {
+  .members__container {
+    padding: 0 4%;
+  }
+  .members__container h1 {
+    font-size: 25px;
+  }
+}
+
+.members__links {
+  line-height: 160%;
+}
+
+.members__arrow {
+  height: 40px;
+  vertical-align: middle;
+}
+
+.members__back {
+  line-height: 40px;
+  vertical-align: middle;
+  margin-bottom: 15px;
 }
 /*# sourceMappingURL=style.css.map */
