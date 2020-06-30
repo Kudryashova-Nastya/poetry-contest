@@ -245,14 +245,11 @@ h3 {
   font-weight: 500;
   padding-left: 17px;
   margin-bottom: 10px;
+  margin-top: 30px;
 }
 
 .comments__button {
   text-align: center;
-}
-
-.comments__button button {
-  padding: 6px 15px;
 }
 
 .comment__title {
@@ -266,7 +263,7 @@ h3 {
 }
 
 .comment__body {
-  background-color: #f7f7f7;
+  background-color: #f0f0f0;
   border-radius: 20px;
   padding: 13px 18px;
   margin-bottom: 12px;
@@ -279,5 +276,63 @@ h3 {
 
 .comment__no {
   text-align: center;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.myComment__body {
+  background-color: white;
+  border-radius: 20px;
+  padding: 13px 18px;
+  margin-bottom: 12px;
+  border: 2px solid #f0f0f0;
+}
+
+label {
+  padding-right: 15px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #8d8d8d;
+  margin: 20px 0;
+  margin-bottom: 35px;
+}
+
+.comments__button button,
+.submit {
+  padding: 8px 25px;
+  background-color: transparent;
+  border-color: #3298dc;
+  color: #3298dc;
+  border-radius: 20px;
+}
+
+.comments__button button:hover,
+.submit:hover {
+  background-color: #3298dc;
+  color: #fff;
+}
+
+.comment__textarea {
+  resize: none;
+  width: 50%;
+  margin: 10px 0;
+}
+
+@media (max-width: 775px) {
+  .comment__textarea {
+    width: 100%;
+  }
+}
+
+.submit {
+  padding: 6px 20px;
+  border-color: #3daffc;
+  color: #3daffc;
 }
 /*# sourceMappingURL=style.css.map */

@@ -33,6 +33,15 @@
             <div class="column">
                 <div class="category__filter">Работы в категории:<br>
                     <a href="?pg=0&sort=love">Любовь</a><br>
+                    <a href="?pg=0&sort=philosophy">Философия</a><br>
+                    <a href="?pg=0&sort=humor">Юмор</a><br>
+                    <a href="?pg=0&sort=home">Родина</a><br>
+                    <a href="?pg=0&sort=fan">Фантазия</a><br>
+                    <a href="?pg=0&sort=sad">Печаль</a><br>
+                    <a href="?pg=0&sort=up">Вдохновение</a><br>
+                    <a href="?pg=0&sort=fauna">Природа</a><br>
+                    <a href="?pg=0&sort=war">Война</a><br>
+                    <a href="?pg=0&sort=child">Для детей</a><br>
                     <a href="?pg=0&sort=all">Все категории</a>
                 </div>
             </div>
@@ -42,16 +51,28 @@
                     if( !isset($_GET['pg']) || $_GET['pg']<0 ) $_GET['pg']=0;
                     // если в параметрах не указан тип сортировки или он недопустим
                     if(!isset($_GET['sort']) || ($_GET['sort']!='all' && $_GET['sort']!='love' &&
-                    $_GET['sort']!='philosophy'))
+                    $_GET['sort']!='philosophy' && $_GET['sort']!='humor' && $_GET['sort']!='home' && $_GET['sort']!='fan'
+                    && $_GET['sort']!='sad' && $_GET['sort']!='up' && $_GET['sort']!='fauna' && $_GET['sort']!='war' && $_GET['sort']!='child'))
                         $_GET['sort']='all'; // устанавливаем сортировку по умолчанию
                     $type = $_GET['sort'];
                     $page = $_GET['pg'];
+                    
                     // осуществляем подключение к базе данных
-                    //global $mysqli;
                     $mysqli = mysqli_connect('std-mysql', 'std_953', '12345678', 'std_953');
                     //$mysqli=pg_connect("host=localhost port=5432 user=postgres password=123 dbname=labaphp") or die("С подключением к базе данных что-то пошло не так"); 
                     if( mysqli_connect_errno() ) // проверяем корректность подключения
                         return 'Ошибка подключения к БД: '.mysqli_connect_error();
+                    
+                    // Обработчик формы для отправки нашего отзыва
+                    $mark = $_POST['mark'];
+                    $com = $_POST['comment'];
+                    $id = $_POST['poem_id'];
+                    $sql_res_newCom=mysqli_query($mysqli, "INSERT INTO My_review(poem_id, my_mark, my_date, my_comment) VALUES ($id, $mark, NOW(), $com)");
+                    $_POST['mark'] = '';
+                    $_POST['comment'] = '';
+                    $_POST['poem_id'] = '';
+
+                    //Основная часть
                     $sql_res=mysqli_query($mysqli, "SELECT COUNT(*) FROM Works"); //проверяем корректность выполнения запроса и определяем его результат 
                     if( !mysqli_errno($mysqli) && $row=mysqli_fetch_row($sql_res)) 
                         {
@@ -72,6 +93,30 @@
                                 case 'philosophy':
                                     $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=2 LIMIT ".($page * 10).", 10";
                                     break;
+                                case 'humor':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=3 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'home':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=4 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'fan':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=5 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'sad':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=6 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'up':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=7 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'fauna':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=8 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'war':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=9 LIMIT ".($page * 10).", 10";
+                                    break;
+                                case 'child':
+                                    $sql="SELECT * FROM Works, Members, Categories WHERE Members.id = Works.author_id AND Works.category_id = Categories.id AND Works.category_id=10 LIMIT ".($page * 10).", 10";
+                                    break;
                                 default:
                                     echo 'Не указан тип сортировки';
                             }
@@ -79,7 +124,7 @@
                             $sql_res=mysqli_query($mysqli, $sql);
                             while( $row=mysqli_fetch_assoc($sql_res) ) // пока есть записи
                                 {
-                                    $poem = str_replace('\n', "<br>", $row['poem']);
+                                    $poem = str_replace('\r\n', "<br>", $row['poem']);
                                     echo '
                                     <article class="work__block" style="border: 2px solid '.$row['color'].'">
                                         <div class="columns">
@@ -97,15 +142,33 @@
                                             </div>
                                         </div>
                                         <div id="comments__component">
-                                        <p class="comments__button"></p>
+                                        <p class="comments__button"><button id="button">Отзывы</button></p>
                                         <div v-if="commentsStatus" class="work__comments">'; 
                                         $work_id =  $row['work_id'];
                                         $sql_comment="SELECT * FROM Reviews, Commentators WHERE Reviews.by_id=Commentators.id AND Reviews.to_poem=".$work_id;
                                         $sql_res_com=mysqli_query($mysqli, $sql_comment);
+                                        $sql_myComment = "SELECT * FROM My_review WHERE My_review.poem_id = ".$work_id;
+                                        $sql_res_myCom=mysqli_query($mysqli, $sql_myComment);
+                                        if ($sql_res_myCom && mysqli_num_rows($sql_res_myCom) != 0)
+                                           {    $row_myc=mysqli_fetch_assoc($sql_res_myCom);
+                                               echo '<h3>Ваш отзыв</h3><div class="myComment__body">
+                                               <p class="comment__title">'.$row_myc['my_name'].' <span class="comment__status"> '.$row_myc['my_status'].'</span> '.date("d.m.Y", strtotime($row_myc['my_date'])).'</p>
+                                               <p class="comment__text">'.$row_myc['my_comment'].'</p>
+                                               <p class="comment__mark">Оценка: <span class="comment__title">'.$row_myc['my_mark'].'</span></p></div>';}
+                                        else echo '<h3>Оставьте свой отзыв</h3><div class="myComment__form">
+                                        <form name="form_mycomment" method="post" action="?pg='.$_GET['pg'].'&sort='.$_GET['sort'].'">
+                                            <label for="mark">Ваша оценка (от 1 до 10): </label>
+                                            <input type="number" name="mark" id="mark" min="1" max="10" required><br>
+                                            <label for="name">Комментарий: </label><br>
+                                            <textarea class="comment__textarea" rows="4" name="comment" id="comment" maxlength="500" required placeholder="Ваш комментарий"></textarea><br>
+                                            <textarea style="display:none" name="poem_id">'.$work_id.'</textarea>
+                                            <input type="submit" name="button" class="submit" value="Добавить отзыв">
+                                        </form>
+                                        </div>';
                                         if ($sql_res_com && mysqli_num_rows($sql_res_com) != 0)
                                         {   
                                             $count_com = mysqli_num_rows($sql_res_com);
-                                            echo '<h3>'.$count_com.' '.($count_com == 1 ? 'отзыв' : ($count_com < 5 ? 'отзыва' : 'отзывов')).'</h3>';
+                                            echo '<h3>'.$count_com.' '.($count_com == 1 ? 'отзыв' : ($count_com < 5 ? 'отзыва' : 'отзывов')).' других пользователей</h3>';
                                             while( $row_c=mysqli_fetch_assoc($sql_res_com) )
                                             {
                                                 echo '<article class="comment__body">
@@ -116,7 +179,7 @@
                                             };
                                         }
                                         else
-                                            echo '<p class="comment__no">У стихотворения пока нет комментариев</p>';
+                                            echo '<p class="comment__no">У стихотворения пока нет отзывов</p>';
                                         echo '</div></div>
                                     </article>';
                                 };
@@ -148,20 +211,7 @@
         Ответственность за тексты произведений авторы несут самостоятельно на основании правил публикации и
         законодательства Российской Федерации.
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        new Vue({
-        el: '#comments__component',
-        data: {
-        commentsStatus: false,
-        methods: {
-            show_comment: function () {
-            this.commentsStatus: true;
-            }
-            }
-        }
-        });
-    </script>
+    
 </body>
 
 </html>

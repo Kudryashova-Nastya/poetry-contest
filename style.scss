@@ -53,15 +53,14 @@ h3 {
     font-weight: 500;
     padding-left: 17px;
     margin-bottom: 10px;
+    margin-top: 30px
 }
 
 .comments__button {
     text-align: center;
 }
 
-.comments__button button {
-    padding: 6px 15px;
-}
+
 
 .comment__title {
     font-weight: 500;
@@ -74,7 +73,7 @@ h3 {
 }
 
 .comment__body {
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(240, 240, 240);
     border-radius: 20px;
     padding: 13px 18px;
     margin-bottom: 12px;
@@ -87,4 +86,59 @@ h3 {
 
 .comment__no {
     text-align: center;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.myComment__body {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 13px 18px;
+    margin-bottom: 12px;
+    border: 2px solid rgb(240, 240, 240);
+}
+
+label {
+    padding-right: 15px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: rgb(141, 141, 141);
+    margin: 20px 0;
+    margin-bottom: 35px;
+}
+
+.comments__button button,
+.submit {
+    padding: 8px 25px;
+    background-color: transparent;
+    border-color: #3298dc;
+    color: #3298dc;
+    border-radius: 20px;
+
+    &:hover {
+        background-color: #3298dc;
+        color: #fff;
+    }
+}
+
+.comment__textarea {
+    resize: none;
+    width: 50%;
+    margin: 10px 0;
+
+    @media (max-width: 775px) {
+        width: 100%;
+    }
+}
+
+.submit {
+    padding: 6px 20px;
+    border-color: #3daffc;
+    color: #3daffc;
 }
