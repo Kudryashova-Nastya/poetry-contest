@@ -142,3 +142,35 @@ hr {
     border-color: #3daffc;
     color: #3daffc;
 }
+
+#pages {
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#pages a {
+    margin: 0 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 12px;
+    display: inline-block;
+    width: 45px;
+}
+
+#pages a:hover {
+    text-decoration: underline;;
+}
+
+
+#pages span {
+    margin: 0 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 12px;
+    display: inline-block;
+    width: 45px;
+}

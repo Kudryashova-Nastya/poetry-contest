@@ -14,17 +14,18 @@
 
 <body>
     <header>
-        <div class="fon__slogan"><a href="index.html"><img class="fon__img" src="img/konkurs2.png"></a></div>
+        <div class="fon__slogan"><a href="index.html"><img class="fon__img" src="img/konkurs2.png" alt="фоновое изображение"></a></div>
         <div class="menu">
             <div class="menu__container">
-                <a href="index.html" class="menu__logo"><img class="logo__img" src="img/pen.svg"></a>
-                <a href="index.html" class="menu__punkt"><img class="mobile-ico" src="img/award.svg"><span
+                <a href="index.html" class="menu__logo"><img class="logo__img" alt="иконка-лого" src="img/pen.svg"></a>
+                <a href="index.html" class="menu__punkt"><img class="mobile-ico" alt="иконка-главная" src="img/award.svg"><span
                         class="punkt-title">О конкурсе</span></a>
-                <a href="works.php" class="menu__punkt"><img class="mobile-ico" src="img/knowledge.svg"><span
+                <a href="works.php" class="menu__punkt"><img class="mobile-ico" alt="иконка-стихотворения" src="img/knowledge.svg"><span
                         class="punkt-title">Стихотворения</span></a><a href="members.php" class="menu__punkt"><img
-                        class="mobile-ico" src="img/author.svg"><span class="punkt-title">Участники</span></a>
-                <a href="reviews.php" class="menu__punkt"><img class="mobile-ico" src="img/review.svg"><span
-                        class="punkt-title">Мои отзывы</span></a></div>
+                        class="mobile-ico" alt="иконка-участники" src="img/author.svg"><span class="punkt-title">Участники</span></a>
+                <a href="reviews.php" class="menu__punkt"><img class="mobile-ico" alt="иконка-отзывы" src="img/review.svg"><span
+                        class="punkt-title">Мои отзывы</span></a>
+            </div>
         </div>
     </header>
     <main>
@@ -64,14 +65,18 @@
                         return 'Ошибка подключения к БД: '.mysqli_connect_error();
                     
                     // Обработчик формы для отправки нашего отзыва
-                    $mark = $_POST['mark'];
-                    $com = $_POST['comment'];
-                    $id = $_POST['poem_id'];
-                    $sql_res_newCom=mysqli_query($mysqli, "INSERT INTO My_review(poem_id, my_mark, my_date, my_comment) VALUES ($id, $mark, NOW(), $com)");
-                    $_POST['mark'] = '';
-                    $_POST['comment'] = '';
-                    $_POST['poem_id'] = '';
-
+                    if (isset($_POST['poemId']))
+                    {
+                        $mark = $_POST['mark'];
+                        $com = $_POST['comment'];
+                        $id = $_POST['poemId'];
+                        $sql_res_newCom=mysqli_query($mysqli, "INSERT INTO My_review(poem_id, my_mark, my_date, my_comment) VALUES ($id, $mark, NOW(), '$com')");
+                        if (!$sql_res_newCom)
+                            echo '<div class="error">При создании отзыва произошла ошибка '.mysqli_errno($mysqli).'. Повторите попытку</div>';
+                        $_POST['mark'] = '';
+                        $_POST['comment'] = '';
+                        $_POST['poemId'] = '';
+                    }
                     //Основная часть
                     $sql_res=mysqli_query($mysqli, "SELECT COUNT(*) FROM Works"); //проверяем корректность выполнения запроса и определяем его результат 
                     if( !mysqli_errno($mysqli) && $row=mysqli_fetch_row($sql_res)) 
@@ -122,6 +127,7 @@
                             }
                             
                             $sql_res=mysqli_query($mysqli, $sql);
+                            $i = 1; //переменная для наименования кнопок Отзывы
                             while( $row=mysqli_fetch_assoc($sql_res) ) // пока есть записи
                                 {
                                     $poem = str_replace('\r\n', "<br>", $row['poem']);
@@ -141,9 +147,10 @@
                                                 <p> Город: '.$row['city'].'</p>
                                             </div>
                                         </div>
-                                        <div id="comments__component">
-                                        <p class="comments__button"><button id="button">Отзывы</button></p>
-                                        <div v-if="commentsStatus" class="work__comments">'; 
+                                        <div class="comments__component">
+                                        <p class="comments__button"><button id="button'.$i.'">Отзывы</button></p>
+                                        <div class="work__comments'.$i.'" style="display: none">'; 
+                                        $i++;
                                         $work_id =  $row['work_id'];
                                         $sql_comment="SELECT * FROM Reviews, Commentators WHERE Reviews.by_id=Commentators.id AND Reviews.to_poem=".$work_id;
                                         $sql_res_com=mysqli_query($mysqli, $sql_comment);
@@ -157,11 +164,11 @@
                                                <p class="comment__mark">Оценка: <span class="comment__title">'.$row_myc['my_mark'].'</span></p></div>';}
                                         else echo '<h3>Оставьте свой отзыв</h3><div class="myComment__form">
                                         <form name="form_mycomment" method="post" action="?pg='.$_GET['pg'].'&sort='.$_GET['sort'].'">
-                                            <label for="mark">Ваша оценка (от 1 до 10): </label>
-                                            <input type="number" name="mark" id="mark" min="1" max="10" required><br>
-                                            <label for="name">Комментарий: </label><br>
-                                            <textarea class="comment__textarea" rows="4" name="comment" id="comment" maxlength="500" required placeholder="Ваш комментарий"></textarea><br>
-                                            <textarea style="display:none" name="poem_id">'.$work_id.'</textarea>
+                                            <label>Ваша оценка (от 1 до 10): </label>
+                                            <input type="number" name="mark" min="1" max="10" required><br>
+                                            <label>Комментарий: </label><br>
+                                            <textarea class="comment__textarea" rows="4" name="comment" maxlength="500" required placeholder="Ваш комментарий"></textarea><br>
+                                            <textarea style="display:none" name="poemId">'.$work_id.'</textarea>
                                             <input type="submit" name="button" class="submit" value="Добавить отзыв">
                                         </form>
                                         </div>';
@@ -179,20 +186,22 @@
                                             };
                                         }
                                         else
-                                            echo '<p class="comment__no">У стихотворения пока нет отзывов</p>';
+                                            echo '<p class="comment__no">У стихотворения пока нет отзывов других пользователей</p>';
                                         echo '</div></div>
                                     </article>';
                                 };
                                 
-                                if( $PAGES>1 ) // если страниц больше одной – добавляем пагинацию
+                                if( $PAGES>1 && $_GET['sort']!='love' &&
+                                $_GET['sort']!='philosophy' && $_GET['sort']!='humor' && $_GET['sort']!='home' && $_GET['sort']!='fan'
+                                && $_GET['sort']!='sad' && $_GET['sort']!='up' && $_GET['sort']!='fauna' && $_GET['sort']!='war' && $_GET['sort']!='child' ) // если страниц больше одной – добавляем пагинацию
                                     {
-                                    $ret.='<div id="pages">'; // блок пагинации
+                                    echo '<div id="pages">'; // блок пагинации
                                         for($i=0; $i<$PAGES; $i++) // цикл для всех страниц пагинации 
                                         if( $i !=$page ) // если не текущая страница
-                                            $ret.='<a href="?pg='.$i.'&sort='.$type.'">'.($i+1).'</a>';
-                                            else // если текущая страница
-                                            $ret.='<span>'.($i+1).'</span>';
-                                            $ret.='</div>';
+                                            echo '<a href="?pg='.$i.'&sort='.$_GET['sort'].'">'.($i+1).'</a>';
+                                        else // если текущая страница
+                                            echo '<span>'.($i+1).'</span>';
+                                        echo '</div>';
                                     }
                                 mysqli_close($mysqli);
                         }
@@ -212,6 +221,8 @@
         законодательства Российской Федерации.
     </footer>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="myjs.js"></script>
 </body>
 
 </html>
