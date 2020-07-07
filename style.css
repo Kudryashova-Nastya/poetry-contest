@@ -403,7 +403,7 @@ hr {
 }
 
 .activeReview {
-  color: #afafaf;
+  color: #999999;
 }
 
 .ok {
@@ -423,18 +423,16 @@ hr {
 
 .edit_form {
   position: absolute;
-  top: 140px;
-  left: 25%;
+  top: 150px;
+  left: 5%;
+  width: 90%;
 }
 
-@media (max-width: 650px) {
-  .edit_form {
-    left: 15px;
-  }
+input {
+  padding: 2px;
 }
 
 .edit_form form label {
-  margin-left: 13px;
   margin-right: 3px;
 }
 
@@ -442,6 +440,8 @@ hr {
   resize: none;
   height: 50px;
   width: 100%;
+  padding: 3px;
+  margin-top: 10px;
 }
 
 .edit_form form #adress {
@@ -450,18 +450,31 @@ hr {
 
 .in-edit {
   position: absolute;
-  top: 335px;
+  top: 370px;
   left: 28%;
+}
+
+@media (max-width: 400px) {
+  .in-edit {
+    left: 20%;
+  }
 }
 
 .edit_form label {
   margin-right: 10px;
-  line-height: 185%;
 }
 
 .edit_form form {
-  padding: 25px;
+  padding: 25px 20%;
   padding-top: 10px;
+  line-height: 190%;
+}
+
+@media (max-width: 660px) {
+  .edit_form form {
+    padding: 25px 5%;
+    padding-top: 10px;
+  }
 }
 
 #edit_links th,
@@ -491,7 +504,7 @@ fieldset {
 }
 
 .stub {
-  height: 230px;
+  height: 280px;
 }
 
 @media (max-width: 1180px) {

@@ -36,6 +36,13 @@
                    if( mysqli_connect_errno() ) // проверяем корректность подключения
                        echo 'Ошибка подключения к БД: '.mysqli_connect_error();
 
+                    // если были переданы данные для удаления записи в таблице
+                    if( isset($_GET['deleteId']))
+                    {
+                        // формируем и выполняем SQL-запрос на удаление записи с указанным id
+                        $sql_res_del=mysqli_query($mysqli, "DELETE FROM My_review WHERE id=".$_GET['deleteId']);
+                    }
+
                     // если были переданы данные для изменения записи в таблице
                     if( isset($_POST['button']) && $_POST['button'] == 'Изменить отзыв')
                     {

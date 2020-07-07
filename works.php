@@ -142,7 +142,7 @@
                                                 <p> Категория: <span style="color: '.$row['color'].'">'.$row['category'].'</span></p>
                                                 <p> Дата публикации: '.date("d.m.Y", strtotime($row['date'])).'</p>
                                                 <p>'.
-                                                 ($row['gender'] == "м" ? 'Сочинитель: ' : 'Сочинительница: ').$row['name'].'</p>
+                                                 ($row['gender'] == "м" ? 'Сочинитель: ' : 'Сочинительница: ').'<a href="members.php?memberId='.$row['author_id'].'">'.$row['name'].'</a></p>
                                                 <p> Возраст: '.$row['age'].'</p>
                                                 <p> Город: '.$row['city'].'</p>
                                             </div>
